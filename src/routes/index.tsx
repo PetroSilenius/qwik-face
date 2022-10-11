@@ -1,8 +1,13 @@
 import { component$, Resource, useResource$ } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 
+interface User {
+  name: string;
+  email: string;
+}
+
 export default component$(() => {
-  const usersResource = useResource$(() => getUsers());
+  const usersResource = useResource$<User[]>(() => getUsers());
 
   return (
     <div>
@@ -31,7 +36,7 @@ export const head: DocumentHead = {
   title: 'Welcome to Qwik',
 };
 
-export async function getUsers(): Promise<string[]> {
+export async function getUsers(): Promise<User[]> {
   console.log('FETCH');
   const resp = await fetch('https://slack.com/api/users.list');
   console.log('FETCH resolved');
