@@ -16,7 +16,10 @@ const getAccessToken = (code: string) => {
 
 export const onGet: RequestHandler<any> = async ({ response, params }) => {
   const code = params.code;
-  const accessToken = await getAccessToken(code);
+  const tokenResponse = await getAccessToken(code);
+
+  const tokenJson = await tokenResponse.json();
+  const accessToken = tokenJson.authed_user.access_token;
 
   response.headers.set('Set-Cookie', `token=${accessToken}`);
   throw response.redirect('/');
