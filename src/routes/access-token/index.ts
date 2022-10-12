@@ -14,8 +14,14 @@ const getAccessToken = (code: string) => {
   });
 };
 
-export const onGet: RequestHandler<any> = async ({ response, params }) => {
-  const code = params.code;
+export const onGet: RequestHandler<any> = async ({ response, url }) => {
+  const code = url.searchParams.get('code');
+
+  if (!code) {
+    response.error(400);
+    return;
+  }
+
   const tokenResponse = await getAccessToken(code);
 
   const tokenJson = await tokenResponse.json();
