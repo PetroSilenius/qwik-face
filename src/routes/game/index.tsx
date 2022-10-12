@@ -4,7 +4,6 @@ import { DocumentHead, RequestHandler, useEndpoint } from '@builder.io/qwik-city
 interface User {
   name: string;
   real_name: string;
-  email: string;
   is_bot: boolean;
   profile: {
     always_active: boolean;
@@ -43,7 +42,7 @@ export default component$(() => {
           <ul>
             {members?.map((member) => (
               <li>
-                {member.name} - {member.email}
+                {member.real_name} <img src={member.profile.image_192} />
               </li>
             ))}
           </ul>
