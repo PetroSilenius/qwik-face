@@ -5,8 +5,8 @@ const getAccessToken = (code: string) => {
 
   const formData = new URLSearchParams();
   formData.append('code', code);
-  formData.append('client_id', '3336676.569200954261');
-  formData.append('client_secret', '678387edca77ef38b18aef6a2962325a');
+  formData.append('client_id', import.meta.env.VITE_SLACK_CLIENT_ID);
+  formData.append('client_secret', import.meta.env.VITE_SLACK_CLIENT_SECRET);
 
   return fetch(url, {
     method: 'POST',
@@ -19,7 +19,7 @@ export const onGet: RequestHandler<any> = async ({ response, params }) => {
   const tokenResponse = await getAccessToken(code);
 
   const tokenJson = await tokenResponse.json();
-  const accessToken = tokenJson.access_token;
+  const accessToken = tokenJson.authed_user?.access_token;
 
   response.headers.set('Set-Cookie', `token=${accessToken}`);
   throw response.redirect('/');
