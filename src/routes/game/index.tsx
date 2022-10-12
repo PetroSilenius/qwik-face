@@ -3,7 +3,14 @@ import { DocumentHead, RequestHandler, useEndpoint } from '@builder.io/qwik-city
 
 interface User {
   name: string;
+  real_name: string;
   email: string;
+  is_bot: boolean;
+  profile: {
+    always_active: boolean;
+    is_custom_image: boolean;
+    image_192: string;
+  };
 }
 
 export const onGet: RequestHandler<User[]> = async ({ request }) => {
@@ -15,7 +22,12 @@ export const onGet: RequestHandler<User[]> = async ({ request }) => {
   const json = await resp.json();
 
   const members: User[] = json.members;
-  return members;
+  const filteredMembers = members
+    .filter((member) => !member.is_bot)
+    .filter((member) => !member.profile.always_active)
+    .filter((member) => member.profile.is_custom_image);
+
+  return filteredMembers;
 };
 
 export default component$(() => {
