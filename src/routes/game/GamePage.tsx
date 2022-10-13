@@ -37,7 +37,7 @@ export default component$(({ members }: { members: User[] }) => {
   const onKeyDown = $((e) => {
     const index = e.keyCode - 37;
 
-    if (index > 3) {
+    if (index > 3 || index < 0) {
       return
     }
 
