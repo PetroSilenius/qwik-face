@@ -1,43 +1,43 @@
 .options {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 10px;
-    grid-template-areas:
-        ". vote1 ."
-        "vote2 . vote3"
-        ". vote4 .";
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 10px;
+  grid-template-areas:
+    '. vote1 .'
+    'vote2 . vote3'
+    '. vote4 .';
 }
 
 .options button:nth-child(1) {
-    grid-area: vote2
+  grid-area: vote1;
 }
 
 .options button:nth-child(2) {
-    grid-area: vote1
+  grid-area: vote2;
 }
 .options button:nth-child(3) {
-    grid-area: vote3
+  grid-area: vote3;
 }
 .options button:nth-child(4) {
-    grid-area: vote4
+  grid-area: vote4;
 }
 
 .options button {
-    width: 160px;
-    height: 60px;
-    background: #2F4858;
-    color: white;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
+  width: 160px;
+  height: 60px;
+  background: #2f4858;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .container {
-    text-align: center;
+  text-align: center;
 }
 
 img {
-    margin-bottom: 80px;
-    border-radius: 15px;
+  margin-bottom: 80px;
+  border-radius: 15px;
 }

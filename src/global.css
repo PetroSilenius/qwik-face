@@ -7,10 +7,10 @@
  */
 
 :root {
-  --qwik-dark-blue: #E53D00;
-  --qwik-light-blue: #E53D00;
-  --qwik-light-purple: #E53D00;
-  --qwik-dark-purple: #E53D00;
+  --qwik-dark-blue: #e53d00;
+  --qwik-light-blue: #e53d00;
+  --qwik-light-purple: #e53d00;
+  --qwik-dark-purple: #e53d00;
 }
 
 body {
@@ -24,12 +24,7 @@ body {
 }
 
 main {
-
-
 }
-
-
-
 
 a,
 a:visited {
@@ -55,4 +50,3 @@ footer a {
 footer a:hover {
   text-decoration: underline;
 }
-
