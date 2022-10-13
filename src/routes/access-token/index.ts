@@ -27,6 +27,11 @@ export const onGet: RequestHandler<any> = async ({ response, url }) => {
   const tokenJson = await tokenResponse.json();
   const accessToken = tokenJson.authed_user?.access_token;
 
+  if (!accessToken) {
+    response.error(400);
+    throw response.redirect('/');
+  }
+
   response.headers.set('Set-Cookie', `token=${accessToken}`);
   throw response.redirect('/game');
 };
