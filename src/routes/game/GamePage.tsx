@@ -1,4 +1,4 @@
-import { component$, useStore } from '@builder.io/qwik';
+import { component$, useStore, $ } from '@builder.io/qwik';
 import { User } from './index';
 import './GamePage.css';
 
@@ -26,18 +26,33 @@ export default component$(({ members }: { members: User[] }) => {
   const randomMembers = shuffle(members).slice(0, 4);
   const correctMember = randomMembers[Math.floor(state.generatorNumber * 4)];
 
+  const onClick = $((e) => {
+    const clickedButton = (e.target as HTMLButtonElement);
+    if (clickedButton.value === randomMembers.indexOf(correctMember)) {
+      state.score ++;
+    }
+    state.generatorNumber = Math.random();
+  })
+
+  const onKeyDown = $((e) => {
+    const index = e.keyCode - 37;
+
+    if (index > 3) {
+      return
+    }
+
+    if (index === randomMembers.indexOf(correctMember)) {
+      state.score ++;
+    }
+    state.generatorNumber = Math.random();
+  })
+
   return (
     <div class="container">
       <img src={correctMember.profile.image_192} />
-      <div className="options">
-      {randomMembers.map((member) => (
-        <button onClick$={(e) => {
-          const clickedButton = (e.target as HTMLButtonElement);
-          if (clickedButton.value === correctMember.id) {
-            state.score ++;
-          }
-          state.generatorNumber = Math.random();
-        }} value={member.id}>{member.real_name}</button>
+      <div className="options" document:onKeyDown$={onKeyDown}>
+      {randomMembers.map((member, index) => (
+        <button onClick$={onClick} value={index}>{member.real_name}</button>
       ))}
       </div>
       <p>{state.score}</p>

@@ -10,11 +10,11 @@
 }
 
 .options button:nth-child(1) {
-    grid-area: vote1
+    grid-area: vote2
 }
 
 .options button:nth-child(2) {
-    grid-area: vote2
+    grid-area: vote1
 }
 .options button:nth-child(3) {
     grid-area: vote3
