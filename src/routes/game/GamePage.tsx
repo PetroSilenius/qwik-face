@@ -1,5 +1,6 @@
 import { component$, useStore } from '@builder.io/qwik';
 import { User } from './index';
+import './GamePage.css';
 
 interface IState {
   generatorNumber: number;
@@ -26,18 +27,19 @@ export default component$(({ members }: { members: User[] }) => {
   const correctMember = randomMembers[Math.floor(state.generatorNumber * 4)];
 
   return (
-    <div>
+    <div class="container">
       <img src={correctMember.profile.image_192} />
+      <div className="options">
       {randomMembers.map((member) => (
         <button onClick$={(e) => {
           const clickedButton = (e.target as HTMLButtonElement);
-
           if (clickedButton.value === correctMember.id) {
-            state.generatorNumber = Math.random();
             state.score ++;
           }
+          state.generatorNumber = Math.random();
         }} value={member.id}>{member.real_name}</button>
       ))}
+      </div>
       <p>{state.score}</p>
     </div>
   );
