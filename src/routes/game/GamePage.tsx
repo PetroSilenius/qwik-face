@@ -1,4 +1,4 @@
-import { component$, useStore, useWatch$ } from '@builder.io/qwik';
+import { component$, useStore } from '@builder.io/qwik';
 import { User } from './index';
 
 interface IState {
@@ -6,12 +6,13 @@ interface IState {
   score: number;
 }
 
-export const shuffle = (array) =>  {
+export const shuffle = (array: User[]) =>  {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
     }
-    return array
+
+    return array;
 }
 
 
@@ -29,12 +30,13 @@ export default component$(({ members }: { members: User[] }) => {
       <img src={correctMember.profile.image_192} />
       {randomMembers.map((member) => (
         <button onClick$={(e) => {
-          if (e.target.value === correctMember.id) {
+          const clickedButton = (e.target as HTMLButtonElement);
+
+          if (clickedButton.value === correctMember.id) {
             state.generatorNumber = Math.random();
             state.score ++;
           }
-        }
-        } value={member.id}>{member.real_name}</button>
+        }} value={member.id}>{member.real_name}</button>
       ))}
       <p>{state.score}</p>
     </div>
