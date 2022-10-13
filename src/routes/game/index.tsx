@@ -1,10 +1,12 @@
 import { component$, Resource } from '@builder.io/qwik';
 import { DocumentHead, RequestHandler, useEndpoint } from '@builder.io/qwik-city';
+import GamePage from './GamePage';
 
-interface User {
+export interface User {
   name: string;
   real_name: string;
   is_bot: boolean;
+  id: string;
   profile: {
     always_active: boolean;
     is_custom_image: boolean;
@@ -12,8 +14,12 @@ interface User {
   };
 }
 
-export const onGet: RequestHandler<User[]> = async ({ request }) => {
+export const onGet: RequestHandler<User[]> = async ({ request, response }) => {
   const token = request.headers.get('cookie')?.split('token=')[1];
+
+  if (!token) {
+    throw response.redirect('/');
+  }
 
   const resp = await fetch('https://slack.com/api/users.list', {
     headers: new Headers({ Authorization: `Bearer ${token}` }),
@@ -39,13 +45,9 @@ export default component$(() => {
         onPending={() => <div>Loading...</div>}
         onRejected={() => <div>Error</div>}
         onResolved={(members) => (
-          <ul>
-            {members?.map((member) => (
-              <li>
-                {member.real_name} <img src={member.profile.image_192} />
-              </li>
-            ))}
-          </ul>
+          <div>
+            <GamePage members={members} />
+          </div>
         )}
       />
     </div>
