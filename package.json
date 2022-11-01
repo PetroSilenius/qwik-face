@@ -15,7 +15,7 @@
     "dev.debug": "node --inspect-brk ./node_modules/vite/bin/vite.js --mode ssr --force",
     "fmt": "prettier --write .",
     "fmt.check": "prettier --check .",
-    "lint": "eslint .",
+    "lint": "eslint src/**/*.ts*",
     "preview": "qwik build preview && vite preview --open",
     "serve": "netlify dev",
     "start": "vite --open --mode ssr",
