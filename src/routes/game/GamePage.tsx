@@ -32,7 +32,7 @@ export default component$(({ members }: { members: User[] }) => {
   const randomMembers = shuffle(members).slice(0, 4);
   const correctMember = randomMembers[Math.floor(state.generatorNumber * 4)];
 
-  const onClick = $((event: any) => {
+  const onClick = $((event: { target: EventTarget }) => {
     const clickedButton = event.target as HTMLButtonElement;
     if (Number(clickedButton.value) === randomMembers.indexOf(correctMember)) {
       state.score++;
@@ -40,7 +40,7 @@ export default component$(({ members }: { members: User[] }) => {
     state.generatorNumber = Math.random();
   });
 
-  const onKeyDown = $((event: any) => {
+  const onKeyDown = $((event: { key: string }) => {
     const pressedKey = event.key as keyof typeof KeyToIndex;
     const index = KeyToIndex[pressedKey];
 
