@@ -65,16 +65,20 @@ The production build will generate client and server modules by running both cli
 npm run build # or `yarn build`
 ```
 
-## Netlify
+## Cloudflare Pages
 
-This starter site is configured to deploy to [Netlify Edge Functions](https://www.netlify.com/products/edge/), which means it will be rendered at an edge location near to your users.
+Cloudflare's [wrangler](https://github.com/cloudflare/wrangler) CLI can be used to preview a production build locally. To start a local server, run:
 
-### Local development
+```
+npm run serve
+```
 
-The [Netlify CLI](https://docs.netlify.com/cli/get-started/) can be used to preview a production build locally. To do so: First build your site, then to start a local server, run:
+Then visit [http://localhost:8787/](http://localhost:8787/)
 
-1. install Netlify CLI globally `npm i -g netlify-cli`
-2. Build your site both ssr and client `npm run build`.
-3. Start a local server with `npm run serve`.
-   In this project, `npm run serve` uses the `netlify dev` command to spin up a server that can handle Netlify's Edge Functions locally.
-4. Visit [http://localhost:8888/](http://localhost:8888/) to check out your site.
+### Deployments
+
+[Cloudflare Pages](https://pages.cloudflare.com/) are deployable through their [Git provider integrations](https://developers.cloudflare.com/pages/platform/git-integration/).
+
+If you don't already have an account, then [create a Cloudflare account here](https://dash.cloudflare.com/sign-up/pages). Next go to your dashboard and follow the [Cloudflare Pages deployment guide](https://developers.cloudflare.com/pages/framework-guides/deploy-anything/).
+
+Within the projects "Settings" for "Build and deployments", the "Build command" should be `npm run build`, and the "Build output directory" should be set to `dist`.
