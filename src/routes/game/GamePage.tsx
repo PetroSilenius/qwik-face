@@ -44,7 +44,7 @@ export default component$(({ members }: { members: User[] }) => {
     const pressedKey = event.key as keyof typeof KeyToIndex;
     const index = KeyToIndex[pressedKey];
 
-    if (!index || typeof index !== 'number') {
+    if (typeof index !== 'number') {
       return;
     }
 
